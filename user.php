@@ -16,7 +16,7 @@
 		$new_pass = $_POST['new_password'];
 
 		if ($old_pass == "" && $new_pass == "") {
-			$up1 = mysqli_query($conn, "UPDATE user SET nama_pegawai='$nama', username='$user', WHERE id='$id'");
+			$up1 = mysqli_query($conn, "UPDATE user SET nama_pegawai='$nama', username='$user' WHERE id='$id'");
 			echo '<script>
 			setTimeout(function() {
 				swal({
@@ -73,7 +73,7 @@
 					}, 500);
 			</script>';
 		} else {
-			$add = mysqli_query($conn, "INSERT INTO user (username, password, nama_pegawai, pekerjaan) VALUES ('$user', '$pass', '$nama', '$alam', '$job')");
+			$add = mysqli_query($conn, "INSERT INTO user (username, password, nama_pegawai, pekerjaan) VALUES ('$user', '$pass', '$nama', '$job')");
 			echo '<script>
 				setTimeout(function() {
 					swal({
