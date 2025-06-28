@@ -60,6 +60,12 @@
                   </div>
 
                   <div class="card card-primary">
+                    <div class="card-header">
+                      <h3>Rekam Medis Puji Pangastuti</h3>
+                    </div>
+                  </div>
+
+                  <div class="card card-primary">
                     <div class="card-header"><h4>Login</h4></div>
 
                     <div class="card-body">
@@ -126,14 +132,14 @@
         new FinisherHeader({
             "count": 10,
             "size": {
-              "min": 50,
+              "min": 100,
               "max": 100,
               "pulse": 0
             },
             "speed": {
               "x": {
                 "min": 0,
-                "max": 0.8
+                "max": 0.2
               },
               "y": {
                 "min": 0,
