@@ -31,6 +31,19 @@
     $stok = $_POST['stok'];
     $harga = $_POST['harga'];
 
+    $cekobat = mysqli_query($conn, "SELECT * FROM obat WHERE nama_obat='$nama'");
+		$baris = mysqli_num_rows($cekobat);
+		if ($baris >= 1) {
+			echo '<script>
+				setTimeout(function() {
+					swal({
+						title: "Obat sudah digunakan",
+						text: "Obat sudah digunakan, gunakan obat lain!",
+						icon: "error"
+						});
+					}, 500);
+			</script>';
+    } else {
     $add = mysqli_query($conn, "INSERT INTO obat (nama_obat, stok, harga) VALUES ('$nama', '$stok', '$harga')");
     echo '<script>
 				setTimeout(function() {
@@ -41,6 +54,7 @@
 						});
 					}, 500);
 			</script>';
+    }
   }
   ?>
 </head>

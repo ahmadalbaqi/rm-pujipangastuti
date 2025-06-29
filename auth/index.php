@@ -22,6 +22,26 @@
   }else{
     include 'connect.php';
     if(isset($_POST['submit'])){
+
+      $recaptchaSecret = '6Lf4d3ErAAAAAOznYZRXQjvXPP-xnp63t6lDh0xD';
+      $recaptchaResponse = $_POST['g-recaptcha-response'];
+
+      $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecret}&response={$recaptchaResponse}");
+      $responseData = json_decode($verify);
+
+      if(!$responseData->success){
+        echo '
+        <script>
+        setTimeout(function() {
+          swal({
+            title: "Captcha Tidak Valid",
+            text: "Silakan isi captcha terlebih dahulu!",
+            icon: "warning"
+          });
+        }, 500);
+        </script>';            
+      } else {
+
       @$user = mysqli_real_escape_string($conn, $_POST['username']);
       @$pass = mysqli_real_escape_string($conn, $_POST['password']);
 
@@ -46,6 +66,7 @@
             $_SESSION['id_pegawai'] = $userid['id'];
           }
         }
+        }    
         ?>
       </head>
       <body>
@@ -95,7 +116,10 @@
                       </div>
 
                       <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6Lf4d3ErAAAAAMjWVVVk2kAMp9BPxg6FyGyNjgia"></div>
+                      </div>                      
 
+                      <div class="form-group">                    
                         <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                           Login
                         </button>
@@ -178,6 +202,7 @@
       <script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
       <script src="../assets/modules/moment.min.js"></script>
       <script src="../assets/js/stisla.js"></script>
+      <script src="https://www.google.com/recaptcha/api.js?hl=id" async defer></script>
 
       <!-- Template JS File -->
       <script src="../assets/js/scripts.js"></script>
